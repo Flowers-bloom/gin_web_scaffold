@@ -10,7 +10,7 @@ import (
 func InitLocalConf() {
 	dir, err := os.Getwd()
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	path := dir + "\\config\\config.json"
@@ -18,7 +18,7 @@ func InitLocalConf() {
 
 	err = viper.ReadInConfig()
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	// 热加载

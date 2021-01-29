@@ -26,15 +26,14 @@ func (fw *FileWriter) setFile(fileName string) {
 	}
 
 	if fw.file, err = os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666); err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	fw.flag = 1
 }
 
 func (fw *FileWriter) Write(data interface{}) {
 	if fw.file == nil {
-		fmt.Println(ErrFileNotCreated)
-		return
+		panic(ErrFileNotCreated)
 	}
 
 	// 日志滚动收集
@@ -42,7 +41,7 @@ func (fw *FileWriter) Write(data interface{}) {
 
 	str := fmt.Sprintf("%v\n", data)
 	if _, err := fw.file.WriteString(str); err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 }
 

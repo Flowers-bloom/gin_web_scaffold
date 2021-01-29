@@ -87,10 +87,10 @@ func SetWriters(writer string) {
 			fw.setFile(time.GetCurrentTimeF("2006-01-02") + ".log")
 			logger.writerList = append(logger.writerList, fw)
 		default:
-			fmt.Printf("unknown writer type: %s\n", writer)
+			panic("invalid suit " + writer)
 		}
 	}else {
-		fmt.Println("can not set writer, logger is nil")
+		panic("can not set writer, logger is nil")
 	}
 }
 

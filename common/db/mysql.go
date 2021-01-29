@@ -1,7 +1,6 @@
 package db
 
 import (
-	"fmt"
 	"github.com/flowers-bloom/gin_web_scaffold/model"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
@@ -12,17 +11,17 @@ var DB *gorm.DB
 
 func GetDB() *gorm.DB {
 	if DB == nil {
-		Init(GetMysqlDSN())
+		Init()
 	}
 	return DB
 }
 
-func Init(connString string) {
+func Init() {
 	var err error
 
-	DB, err = gorm.Open(mysql.Open(connString), &gorm.Config{})
+	DB, err = gorm.Open(mysql.Open(GetMysqlDSN()), &gorm.Config{})
 	if err != nil {
-		fmt.Printf("%v\n", err)
+		panic(err)
 	}
 
 	Migrate()
@@ -32,7 +31,9 @@ func Init(connString string) {
 // 修改数据库中模型，和 model 中定义的保持一致
 func Migrate() {
 	if DB != nil {
-		DB.AutoMigrate(&model.User{})
+		DB.AutoMigrate(&model.Student{})
+		DB.AutoMigrate(&model.Course{})
+		DB.AutoMigrate(&model.Score{})
 	}
 }
 

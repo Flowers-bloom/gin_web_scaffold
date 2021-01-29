@@ -1,0 +1,4 @@
+2021/01/29 09:02:43 [Error] github.com/flowers-bloom/gin_web_scaffold/common.Error:34 [Key: 'Student.Sex' Error:Field validation for 'Sex' failed on the 'len' tag]
+2021/01/29 09:05:53 [Error] github.com/flowers-bloom/gin_web_scaffold/api.(*StudentApi).Register:30 [Key: 'Student.Sex' Error:Field validation for 'Sex' failed on the 'len' tag]
+2021/01/29 09:06:32 [Error] github.com/flowers-bloom/gin_web_scaffold/api.(*StudentApi).Register:30 [Key: 'Student.Sex' Error:Field validation for 'Sex' failed on the 'len' tag
+Key: 'Student.Age' Error:Field validation for 'Age' failed on the 'required' tag]
