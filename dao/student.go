@@ -1,11 +1,12 @@
 package dao
 
 import (
+	"time"
+
 	"github.com/flowers-bloom/gin_web_scaffold/common"
 	"github.com/flowers-bloom/gin_web_scaffold/common/custom"
 	"github.com/flowers-bloom/gin_web_scaffold/common/db"
 	"github.com/flowers-bloom/gin_web_scaffold/model"
-	"time"
 )
 
 type StudentDao struct {
@@ -36,8 +37,8 @@ func (s *StudentDao) GetAll() common.PageResult {
 	}
 
 	return common.PageResult{
-		Total:result.RowsAffected,
-		Rows:rows,
+		Total: result.RowsAffected,
+		Rows:  rows,
 	}
 }
 
@@ -58,4 +59,8 @@ func (s *StudentDao) DeleteById(id int) {
 
 func (s *StudentDao) Update(student model.Student) {
 	db.GetDB().Save(&student)
+}
+
+func (s *StudentDao) Exist(email string, student *model.Student) {
+	db.GetDB().Where("email = ?", email).First(student)
 }

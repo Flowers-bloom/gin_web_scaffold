@@ -8,12 +8,12 @@ import (
 type Result struct {
 	Code int `json:"code"`
 	Msg string `json:"msg"`
-	Data interface{} `json:"data, omitempty"`
+	Data interface{} `json:"data,omitempty"`
 	TraceId string `json:"traceId"`
-	Error string `json:"error, omitempty"`
+	Error string `json:"error,omitempty"`
 }
 
-// 请求成功返回
+// Success 请求成功返回
 func Success(code int, msg string, data interface{}) Result {
 	return Result{
 		Code: code,

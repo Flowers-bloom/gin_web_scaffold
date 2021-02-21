@@ -2,9 +2,10 @@ package redis
 
 import (
 	"context"
+	"time"
+
 	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
-	"time"
 )
 
 var ctx = context.Background()
@@ -13,9 +14,9 @@ var rdb *redis.Client
 func GetRdb() *redis.Client {
 	if rdb == nil {
 		rdb = redis.NewClient(&redis.Options{
-			Addr:viper.GetString("redis.addr"),
-			Password:viper.GetString("redis.password"),
-			DB:viper.GetInt("redis.db"),
+			Addr:     viper.GetString("redis.addr"),
+			Password: viper.GetString("redis.password"),
+			DB:       viper.GetInt("redis.db"),
 		})
 	}
 	return rdb
@@ -29,6 +30,22 @@ func Exists(key string) bool {
 	}
 
 	return i > 0
+}
+
+func TTL(key string) time.Duration {
+	t, err := GetRdb().TTL(ctx, key).Result()
+	if err != nil {
+		panic(err)
+	}
+
+	return t
+}
+
+func Expire(key string, expire time.Duration) {
+	err := GetRdb().Expire(ctx, key, expire).Err()
+	if err != nil {
+		panic(err)
+	}
 }
 
 func Del(key string) {
